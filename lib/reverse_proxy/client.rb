@@ -37,13 +37,13 @@ module ReverseProxy
 
     def request(env, options = {}, &block)
       options.reverse_merge!(
-        headers:               {},
-        http:                  {},
-        path:                  nil,
-        username:              nil,
-        password:              nil,
-        verify_ssl:            true,
-        reset_accept_encoding: false
+        'headers' =>               {},
+        'http' =>                  {},
+        'path' =>                  nil,
+        'username' =>              nil,
+        'password' =>              nil,
+        'verify_ssl' =>            true,
+        'reset_accept_encoding' => false
       )
 
       source_request = Rack::Request.new(env)
@@ -154,8 +154,8 @@ module ReverseProxy
       return {} unless info
 
       cookie = {
-        name: info[1],
-        value: CGI.unescape(info[2]),
+        'name' => info[1],
+        'value' => CGI.unescape(info[2]),
       }
 
       params.each do |param|

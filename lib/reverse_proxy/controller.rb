@@ -39,7 +39,7 @@ module ReverseProxy
             redirect_uri.port = request.port if redirect_uri.port == proxy_uri.port
           end
 
-          redirect_to redirect_uri.to_s, status: code and return
+          redirect_to redirect_uri.to_s, :status => code and return
         end
 
         config.on_complete do |code, response|
@@ -47,9 +47,9 @@ module ReverseProxy
           body = response.body.to_s
 
           if content_type and content_type.match /image/
-            send_data body, content_type: content_type, disposition: "inline", status: code
+            send_data body, :content_type => content_type, :disposition => "inline", :status => code
           else
-            render body: body, content_type: content_type, status: code
+            render :body => body, :content_type => content_type, :status => code
           end
         end
 
